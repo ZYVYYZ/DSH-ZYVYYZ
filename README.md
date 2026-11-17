@@ -6,6 +6,8 @@
 
 汉字约 16.4 千 · v0.2 · 2026-11-17 · 作者：ZYVYYZ + 七条鱼
 
+> **不想碰 git？** 直接下整包：[最新发布](https://github.com/ZYVYYZ/DSH-ZYVYYZ/releases/latest)（一个 zip，书 + 两页版 + 给 AI 的包）。
+
 ## 这个包里有什么
 
 你下载下来是一个文件夹，里面三样：
@@ -20,6 +22,7 @@
 
 ## 拿哪个
 
+- **不想下整个仓库** → [最新发布](https://github.com/ZYVYYZ/DSH-ZYVYYZ/releases/latest)（一个 zip 拿全，约 1.1 MB）
 - **人读** → [`book/人教版.pdf`](book/人教版.pdf)（46 页，印了水印与校验码）
 - **连 46 页都不想读** → [`book/丈育版.pdf`](book/丈育版.pdf)（2 页，全文没有一个术语）
 - **给 AI 用** → [`kit/`](kit)（整个目录丢给一条会话，让它从 `00-引言.md` 读起）
