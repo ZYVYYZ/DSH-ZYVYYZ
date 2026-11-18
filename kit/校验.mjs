@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const MANIFEST = path.join(ROOT, '清单.sha256');
-const SKIP = new Set(['清单.sha256', '校验.mjs']);
+const SKIP = new Set(['清单.sha256', '校验.mjs', 'kit/清单.sha256', 'kit/校验.mjs']);
 
 function walk(dir, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -18,7 +18,9 @@ function walk(dir, out = []) {
   }
   return out;
 }
-const sha = (p) => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+// 2026-11-18 03 值班补：现场那一行本来就是给人每天改的，算哈希前先抹掉它。
+const normLive = (buf) => buf.toString("utf8").replace(/^\*\*\d{4}-\d{2}-\d{2} \d{2}:\d{2}\*\*.*$/m, "**<现场>**");
+const sha = (p) => crypto.createHash("sha256").update(normLive(fs.readFileSync(p))).digest("hex");
 
 const files = walk(ROOT).filter((f) => !SKIP.has(f)).sort();
 
@@ -51,12 +53,29 @@ for (const f of files) {
   for (const m of text.matchAll(/`([^`\s]+\.md)`/g)) {
     const ref = m[1];
     if (ref.startsWith("../") || ref.startsWith("http")) continue; // 跨包引用不查
+    if (/^(入门|进阶|速成|人教版)\//.test(ref)) continue; // 指人版书章节的引用，本包内没有
     if (!ref.includes("/")) continue;        // 只查带目录的引用（顶层文件名多是示例/占位）
     if (/[<>{}]/.test(ref)) continue;         // <名字> 这类占位符跳过
-    if (!fs.existsSync(path.join(ROOT, ref))) { console.log("引用不存在  " + f + " -> " + ref); refBad++; }
+    // 引用按“引用者所在目录”优先解析（kit 内的文档写的是 kit 内相对路径）
+    const near = path.join(path.dirname(path.join(ROOT, f)), ref);
+    if (!fs.existsSync(path.join(ROOT, ref)) && !fs.existsSync(near)) { console.log("引用不存在  " + f + " -> " + ref); refBad++; }
   }
 }
 if (refBad > 0) { console.log("\n引用检查不通过：" + refBad + " 处指向不存在的文件。"); process.exitCode = 1; }
+// 2026-11-18 03：包里有两份清单（根一份、kit 一份）。两份漂移 = 有人只更新了一份。
+const innerPath = fs.existsSync(path.join(ROOT, 'kit/清单.sha256')) ? path.join(ROOT, 'kit/清单.sha256') : path.join(ROOT, '清单.sha256');
+const innerBase = path.dirname(innerPath);
+let drift = 0;
+if (fs.existsSync(innerPath)) {
+  const lines = fs.readFileSync(innerPath, 'utf8').trim().split('\n');
+  for (const l of lines) {
+    const i = l.indexOf('  '); if (i < 0) continue;
+    const h = l.slice(0, i), f = l.slice(i + 2);
+    const p = path.join(innerBase, f);
+    if (!fs.existsSync(p) || crypto.createHash('sha256').update(normLive(fs.readFileSync(p))).digest('hex') !== h) { console.log('kit 清单漂移  ' + f); drift++; }
+  }
+  if (drift) { console.log('不通过：kit/清单.sha256 有 ' + drift + ' 条与实际不符（两份清单不一致）'); process.exitCode = 1; }
+}
 console.log('');
-if (bad === 0 && extra === 0) console.log(`通过：${want.size} 个文件，与清单一致。`);
-else { console.log(`不通过：${bad} 处不符 / ${extra} 处多出。**这不是原件。**`); process.exitCode = 1; }
+if (bad === 0 && extra === 0 && refBad === 0 && drift === 0) console.log(`通过：${want.size} 个文件，与清单一致。`);
+else { console.log(`不通过：${bad} 处不符 / ${extra} 处多出 / ${refBad} 处引用不存在 / ${drift} 处清单漂移。**这不是原件。**`); process.exitCode = 1; }

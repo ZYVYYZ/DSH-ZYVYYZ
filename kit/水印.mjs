@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const TARGETS = ['00-引言.md', '署名与许可.md', '起壳.md'];
-const PAYLOAD = 'ZYVYYZ+7fish v0.2 2026-11-16';
+const PAYLOAD = 'ZYVYYZ+7fish v0.3 2026-11-18';
 const Z0 = '\u200B', Z1 = '\u200C', WRAP = '\u2060';
 
 function encode(s) {
@@ -32,7 +32,7 @@ if (process.argv.includes('--write')) {
     const p = path.join(ROOT, f);
     if (!fs.existsSync(p)) { console.log('缺文件', f); continue; }
     let t = fs.readFileSync(p, 'utf8');
-    t = t.replace(/\u2060[\u200b\u200c]+\u2060/g, ''); // 先清旧的
+    t = t.replace(/\u2060[\u200b\u200c]+\u2060/g, '').replace(/\n+$/, '\n'); // 先清旧的，并把尾部空行收成一个（否则每跑一次多一行）
     if (!t.endsWith('\n')) t += '\n';
     fs.writeFileSync(p, t + wm + '\n');
     console.log('写入水印', f);

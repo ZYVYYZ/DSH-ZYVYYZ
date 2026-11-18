@@ -4,15 +4,22 @@
 >
 > **This is not a tutorial.** It is a record of trial and error, written down because nobody had written the tutorial yet. Take it as reference, not as instructions.
 
-汉字约 16.4 千 · v0.2 · 2026-11-17 · 作者：ZYVYYZ + 七条鱼
+v0.3 · 2026-11-18 · 作者：ZYVYYZ + 七条鱼
 
 > **不想碰 git？** 直接下整包：[最新发布](https://github.com/ZYVYYZ/DSH-ZYVYYZ/releases/latest)（一个 zip，书 + 两页版 + 给 AI 的包）。
+
+## 三句话看懂
+
+1. **这是什么**：一份**记录**（怎么养一条会失忆的 AI）+ 一套**可选的教具**（模板、脚本、懒人包）。
+2. **这不是什么**：不是教程、不是 SDK、不是提示词包、不提供任何承诺。
+   **尤其不是安装包**——按“装软件”来装，你会得到一个空文件夹；它是给 **AI 读**的，不是给机器装的。
+3. **先读哪份**：只想判断值不值得 → [`book/丈育版.pdf`](book/丈育版.pdf)（两页）；要自己搭 → 书；要让 AI 用 → [`kit/`](kit)。
 
 ## 这个包里有什么
 
 你下载下来是一个文件夹，里面三样：
 
-- **`book/人教版.pdf`** —— 书本体（46 页）；
+- **`book/人教版/`** —— 书本体，**一章一份 PDF**（入门 / 进阶 / 速成，按文件夹放）；
 - **`book/丈育版.pdf`** —— 两页版（2 页），全文没有一个术语；
 - **`kit/`** —— 给 AI 吃的包（模板、脚本、清单）。
 
@@ -22,9 +29,9 @@
 
 ## 拿哪个
 
-- **不想下整个仓库** → [最新发布](https://github.com/ZYVYYZ/DSH-ZYVYYZ/releases/latest)（一个 zip 拿全，约 1.1 MB）
-- **人读** → [`book/人教版.pdf`](book/人教版.pdf)（46 页，印了水印与校验码）
-- **连 46 页都不想读** → [`book/丈育版.pdf`](book/丈育版.pdf)（2 页，全文没有一个术语）
+- **不想下整个仓库** → [最新发布](https://github.com/ZYVYYZ/DSH-ZYVYYZ/releases/latest)（一个 zip 拿全，约 7.4 MB——大头是 35 份 PDF）
+- **人读** → [`book/人教版/`](book/人教版/)（**一章一份**，印了水印与校验码）
+- **连两页都不想读** → [`book/丈育版.pdf`](book/丈育版.pdf)（2 页，全文没有一个术语）
 - **给 AI 用** → [`kit/`](kit)（整个目录丢给一条会话，让它从 `00-引言.md` 读起）
 
 **人要做的事只有一件**：把 `kit/` 交给一条新会话，然后别替它翻页、别替它答 `用不用`。
@@ -59,7 +66,7 @@
 
 ## 版本
 
-v0.2（2026-11-17）：两版失败条目对齐（各 20 条）· 成本改标估算 · 全部表格改缩进列表 · 作者的话收齐 · 详见 [`docs/CHANGELOG.md`](docs/CHANGELOG.md)。
+v0.3（2026-11-18）：新增「路线差在哪」「养不起的时候怎么停」· 加 K21（外部·未核，不计入二十条）· 水印改成一行浅色字 · 一章一份 PDF · 详见 [`docs/CHANGELOG.md`](docs/CHANGELOG.md)。
 
 ## English (short)
 
@@ -67,7 +74,7 @@ A bilingual record of one attempt to make an AI assistant survive its own contex
 
 **What it is not:** not a tutorial, not a product, not a promise that the AI remembers you.
 
-- Read: [`book/人教版.pdf`](book/人教版.pdf) (Chinese, 46 pp.)
+- Read: [`book/人教版/`](book/人教版/) (Chinese, one PDF per chapter)
 - Feed to an AI: [`kit/`](kit) (start at `00-引言.md`)
 - License: use/modify/translate freely; **do not sell**.
 
