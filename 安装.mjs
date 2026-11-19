@@ -85,11 +85,11 @@ const manifest = files.map((f) => `${crypto.createHash('sha256').update(normLive
 if (copied.length > 0) fs.writeFileSync(path.join(kitDst, '清单.sha256'), manifest, 'utf8');
 else console.log('  已有内容，跳过清单重算（清单不动）');
 
-console.log(`懒人包 v0.3 · 装好了：${target}`);
+console.log(`懒人包 v0.4 · 装好了：${target}`);
 console.log(`  复制 ${copied.length} 个文件${skipped.length ? `，跳过已存在的 ${skipped.length} 个` : ''}${wroteLive ? '；现场那一行已写进 kit/起壳.md' : ''}`);
 console.log('');
 console.log('接下来三件，按顺序：');
-console.log('  1. 打开 kit/先读这个.txt —— 它会告诉你先读哪份。');
+console.log('  1. 打开 kit/README.md —— 它会告诉你先读哪份。');
 console.log('  2. 改 kit/起壳.md 第一节那一行（谁负责、在干什么）。');
 console.log('  3. 把 kit/ 交给一条 AI 会话，让它从 kit/起壳.md 读起。');
 console.log('');
