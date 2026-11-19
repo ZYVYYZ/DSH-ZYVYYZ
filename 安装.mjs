@@ -85,7 +85,7 @@ const manifest = files.map((f) => `${crypto.createHash('sha256').update(normLive
 if (copied.length > 0) fs.writeFileSync(path.join(kitDst, '清单.sha256'), manifest, 'utf8');
 else console.log('  已有内容，跳过清单重算（清单不动）');
 
-console.log(`懒人包 v0.4 · 装好了：${target}`);
+console.log(`懒人包 v0.4.1 · 装好了：${target}`);
 console.log(`  复制 ${copied.length} 个文件${skipped.length ? `，跳过已存在的 ${skipped.length} 个` : ''}${wroteLive ? '；现场那一行已写进 kit/起壳.md' : ''}`);
 console.log('');
 console.log('接下来三件，按顺序：');
