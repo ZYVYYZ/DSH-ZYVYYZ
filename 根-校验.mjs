@@ -10,8 +10,13 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const MANIFEST = path.join(ROOT, '清单.sha256');
 const SKIP = new Set(['清单.sha256', '校验.mjs', 'kit/清单.sha256', 'kit/校验.mjs']);
 
+// 2026-11-19 补：.git/ 不是仓库内容。不跳过的话，在 clone 里跑会把 git 自己几百个文件算进来，
+// 写出来的清单是错的，校验还会判「这不是原件」——PC 上实测：296 个文件、162 处多出。
+const IGNORE_DIRS = new Set(['.git', '.github', 'node_modules', '.cache']);
+
 function walk(dir, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (e.isDirectory() && IGNORE_DIRS.has(e.name)) continue;
     const p = path.join(dir, e.name);
     if (e.isDirectory()) walk(p, out);
     else out.push(path.relative(ROOT, p).split(path.sep).join('/'));
