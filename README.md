@@ -4,9 +4,9 @@
 >
 > **This is not a tutorial.** It is a record of trial and error, written down because nobody had written the tutorial yet. Take it as reference, not as instructions.
 
-v0.3 · 2026-11-18 · 作者：ZYVYYZ + 七条鱼
+v0.4 · 2026-11-19 · 作者：ZYVYYZ + 七条鱼
 
-> **不想碰 git？** 直接下整包：[最新发布](https://github.com/ZYVYYZ/DSH-ZYVYYZ/releases/latest)（一个 zip，书 + 两页版 + 给 AI 的包）。
+> **不想碰 git？** 直接下整包：[最新发布](https://github.com/ZYVYYZ/DSH-ZYVYYZ/releases/latest)。三个包按人分：**整包**（书 + 包全量）· **懒人包**（装完就能跑）· **传火包**（只有一条会话的人，十分钟版）。
 
 ## 三句话看懂
 
@@ -65,6 +65,8 @@ v0.3 · 2026-11-18 · 作者：ZYVYYZ + 七条鱼
 - **不可以**：**卖**（打包卖、订阅卖、做成课程/咨询/会员卖）、去掉署名再发、声称原创。
 
 ## 版本
+
+v0.4（2026-11-19）：包根改成 `README.md`（模型先找这个名字）· 新增 `00-给鱼的.md`（给 AI 的门，不是话术）· 新增**传火包**（最小形态）· 书补 §4.1「判据怎么从数据里长出来」· 六章页眉字数修正后全书重印 · 仓库根校验器能跑了。
 
 v0.3（2026-11-18）：新增「路线差在哪」「养不起的时候怎么停」· 加 K21（外部·未核，不计入二十条）· 水印改成一行浅色字 · 一章一份 PDF · 详见 [`docs/CHANGELOG.md`](docs/CHANGELOG.md)。
 
